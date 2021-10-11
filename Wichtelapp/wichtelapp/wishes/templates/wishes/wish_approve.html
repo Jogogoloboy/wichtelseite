@@ -1,0 +1,13 @@
+{% extends 'pages/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Wunsch als angekommen markieren</h1>
+
+<form action="" method=POST> {% csrf_token %}
+    <input type="submit" value="Empfang bestätigen">
+</form>
+
+Hier kannst du auf einen Button klicken, wenn du Post bekommen hast. Dein Secret Santa weiß dann, dass das Geschenk sicher angekommen ist.
+
+{% endblock %}

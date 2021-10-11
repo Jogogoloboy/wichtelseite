@@ -1,0 +1,28 @@
+{% extends 'pages/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Add wish to database</h1>
+
+{% if notAllowed %}
+<p>Du hast 3 Wünsche eingetragen. Jetzt heißt es warten auf Santa Claws.</p>
+{% else %}
+
+{% if submitted %}
+Dein Wunsch wurde erfolgreich eingetragen.
+
+<a href="{% url 'makeawish' %}">Noch einen Wunsch eintragen.</a>
+
+{% else %}
+
+<form action="" method=POST> {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Wunsch eintragen">
+</form>
+
+{% endif %}
+
+
+
+{% endif %}
+{% endblock %}

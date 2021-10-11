@@ -1,0 +1,145 @@
+{% extends 'pages/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Meine angenommenen Wünsche</h1>
+
+{% for wish, profile in data.items %}
+
+<div>
+    <!---Der Wunsch-->
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2">Wunsch von {{ wish.wisher }} </a>
+                <small class="text-muted">der Wunsch ist im Status {{ wish.state }}.</small>
+            </div>
+            <h2><a class="article-title">{{ wish.title }}</a></h2>
+            <p class="article-content">{{ wish.description }}</p>
+        </div>
+    </article>
+
+    <!---Das Profil des Wünschenden von obenstehendem Wunsch-->
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a href="{{ profile.image1.url }}" target="_blank"><img class="rounded-circle account-img" src="{{ profile.image1.url }}"></img></a>
+                <a href="{{ profile.image2.url }}" target="_blank"><img class="rounded-circle account-img" src="{{ profile.image2.url }}"></img></a>
+                <a href="{{ profile.image3.url }}" target="_blank"><img class="rounded-circle account-img" src="{{ profile.image3.url }}"></img></a>
+                <br>
+                <a class="mr-2">{{ profile.user }}s Profil </a>
+            </div>
+            <br>
+
+            <a class="article-title"><b>Meine Adresse</b></a>
+            <p class="article-content">{{ profile.address }}</p>
+            <br>
+
+            {% if profile.favoritecolors or profile.favoritematerials or profile.favoritesmells or profile.favoritefoods or profile.favoritestyles or profile.nerdlove %}
+            <h3>Ich mag</h3>
+            {% endif %}
+
+            {% if profile.favoritecolors %}
+            <a class="article-title"><b>Meine Lieblingsfarben</b></a>
+            <p class="article-content">{{ profile.favoritecolors }}</p>
+            {% endif %}
+
+            {% if profile.favoritematerials %}
+            <a class="article-title"><b>Meine Lieblingsmaterialien</b></a>
+            <p class="article-content">{{ profile.favoritematerials }}</p>
+            {% endif %}
+
+            {% if profile.favoritesmells %}
+            <a class="article-title"><b>Meine Lieblingsgerüche</b></a>
+            <p class="article-content">{{ profile.favoritesmells }}</p>
+            {% endif %}
+
+            {% if profile.favoritefoods %}
+            <a class="article-title"><b>Meine Lieblingsessen/getränke</b></a>
+            <p class="article-content">{{ profile.favoritefoods }}</p>
+            {% endif %}
+
+            {% if profile.favoritestyles %}
+            <a class="article-title"><b>Meine Lieblingsmuster/Motive/Modestile</b></a>
+            <p class="article-content">{{ profile.favoritestyles }}</p>
+            {% endif %}
+
+            {% if profile.nerdlove %}
+            <a class="article-title"><b>Mein Nerd-Herz schlägt für...</b></a>
+            <p class="article-content">{{ profile.nerdlove }}</p>
+            {% endif %}
+
+            {% if profile.idontlike or profile.allergies %}
+            <h3>Ich mag nicht</h3>
+            {% endif %}
+
+            {% if profile.idontlike %}
+            <a class="article-title"><b>Farben/Materialien/Gerüche/Geschmäcker/Muster/Stile, die ich NICHT mag</b></a>
+            <p class="article-content">{{ profile.idontlike }}</p>
+            {% endif %}
+
+            {% if profile.allergies %}
+            <a class="article-title"><b>Ich bin allergisch auf.../ich verzichte auf.../ich vertrage ... nicht</b></a>
+            <p class="article-content">{{ profile.allergies }}</p>
+            {% endif %}
+
+            {% if profile.charakters or profile.accessories or profile.pinterest or profile.sizes or profile.other %}
+            <h3>Weitere Infos</h3>
+            {% endif %}
+
+            {% if profile.charakters %}
+            <a class="article-title"><b>Meine Larpcharaktere</b></a>
+            <p class="article-content">{{ profile.characters }}</p>
+            {% endif %}
+
+            {% if profile.sizes %}
+            <a class="article-title"><b>Meine Maße/Kleidergrößen</b></a>
+            <p class="article-content">{{ profile.sizes }}</p>
+            {% endif %}
+
+            {% if profile.accessories %}
+            <a class="article-title"><b>Diese Arten von Schmuck/Accessoires trage ich im Alltag</b></a>
+            <p class="article-content">{{ profile.accessories }}</p>
+            {% endif %}
+
+            {% if profile.pinterest %}
+            <a class="article-title"><b>Hier kannst du meinen Geschmack stalken:</b></a>
+            <p class="article-content"><a href=" {{ profile.pinterest }} ">Mein Pinterest</a></p>
+            {% endif %}
+
+            {% if profile.other %}
+            <a class="article-title"><b>Sonstige Anmerkungen</b></a>
+            <p class="article-content">{{ profile.other }}</p>
+            {% endif %}
+
+        </div>
+    </article>
+{% if wish.state == 'Sent' %}
+Dein Geschenk wurde am {{ wish.sent }} verschickt. 
+
+{% if wish.trackingnr %} 
+Die von dir angegebene Trackingnummer ist: <b>{{ wish.trackingnr}}</b>
+{% endif %}
+
+
+{% elif wish.state == 'Received' %}
+Dein Geschenk wurde am {{ wish.sent }} verschickt und am {{ wish.received }} von {{ wish.wisher }} als angekommen bestätigt.
+
+
+{% else %}
+    <form action="" method=POST> {% csrf_token %}
+        {{ form|crispy }}
+        <input type="text" name="wishid" value="{{ wish.id }}" readonly style="visibility: hidden;">
+        <input type="submit" value="Wunsch als verschickt markieren">
+    </form>
+
+{% endif %}
+</div>
+
+<br/>
+<br/>
+
+
+{% endfor %}
+
+{% endblock %}

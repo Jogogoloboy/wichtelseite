@@ -1,0 +1,39 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+<h1>Wunschliste</h1>
+
+{% if submitted %}
+yo...hoho
+{% else %}
+
+{% if is_allowed %}
+
+{% for wish in wishes %}
+
+<article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2">{{ wish.get_category_display }} {{ wish.wisher }}</a>
+        <small class="text-muted">{{ wish.get_difficulty_display }}  {{ wish.state }} </small>
+      </div>
+      <h2><a class="article-title">{{ wish.title }}</a></h2>
+      <p class="article-content">{{ wish.description }}</p>
+    </div>
+    <form action= "" method=POST > {% csrf_token %} 
+      <input type="text" name="wishid" value="{{ wish.id }}" readonly style="visibility: hidden;">
+      <input type="submit" name="submit" value="Wunsch erfüllen">
+    </form>
+  </article>
+
+{% endfor %}
+
+{% else %}
+Du hast schon einen Wunsch ausgewählt.
+{% endif %}
+{% endif %}
+
+
+{% endblock %}
+
+

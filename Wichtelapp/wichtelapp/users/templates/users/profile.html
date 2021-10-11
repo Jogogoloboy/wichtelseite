@@ -1,0 +1,29 @@
+{% extends 'pages/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if request.POST %}
+<div class="alert alert-info">
+  Dein Profil wurde gespeichert.
+</div>
+{% endif %}
+    <div class="content-section">
+      <div class="media">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <img class="rounded-circle account-img" src="{{ user.profile.image1.url }}"></img>
+          <img class="rounded-circle account-img" src="{{ user.profile.image2.url }}"></img>
+          <img class="rounded-circle account-img" src="{{ user.profile.image3.url }}"></img>
+        </div>
+      </div>
+      <form method='POST' enctype="multipart/form-data"> 
+          {% csrf_token %}
+          <fieldsset class='form-group'>
+              <legend class='border-bottom mb-4'>Steckbrief</legend>
+          {{ p_form|crispy }}
+          <!---{{ u_form|crispy }}-->
+      </fieldsset>
+      <button class='btn btn-outline-info' type='submit'>Speichern</button>
+  </form>
+    </div>
+{% endblock content %}

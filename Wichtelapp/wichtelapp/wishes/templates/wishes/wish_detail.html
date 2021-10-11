@@ -1,0 +1,14 @@
+{% extends 'pages/base.html' %}
+
+
+{% block content %}
+<h1>in App Template</h1>
+<h1>{{object.title}}</h1>
+
+<!----<img class="rounded-circle article-img" scr="{{ post.author.profile.image.url}}">
+--->
+
+<p>
+{{object.description}}
+</p>
+{% endblock %}
