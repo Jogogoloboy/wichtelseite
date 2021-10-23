@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import WishForm, TakeWish, WishSentForm
 from django.db import models
-from .models import Wish
+from .models import Wish, Phase
 from users.models import Profile
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -63,9 +63,6 @@ def wish_todo_view(request):
 
 
 
-    
-
-
 
 @login_required
 def wish_create_view(request):
@@ -87,7 +84,7 @@ def wish_create_view(request):
         if 'submitted' in request.GET:
             submitted = True
     form = WishForm
-    return render(request, 'wishes/wish_create.html', {'form':form, 'submitted':submitted, 'notAllowed': False})
+    return render(request, 'wishes/wish_create.html', {'form':form, 'submitted':submitted, 'notAllowed': False,})
 
 @login_required
 def wish_list_view(request):

@@ -2,6 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+Wichtelapp/wichtelapp/pages/migrations/*
+Wichtelapp/wichtelapp/users/migrations/*
+Wichtelapp/wichtelapp/wishes/migrations/*
+Wichtelapp/wichtelapp/db.sqlite3
+Wichtelapp/wichtelapp/media/*
 
 # C extensions
 *.so

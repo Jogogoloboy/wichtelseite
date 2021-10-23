@@ -12,7 +12,7 @@
         <div class="media-body">
             <div class="article-metadata">
                 <a class="mr-2">Wunsch von {{ wish.wisher }} </a>
-                <small class="text-muted">der Wunsch ist im Status {{ wish.state }}.</small>
+             <!--   <small class="text-muted">der Wunsch ist im Status {{ wish.state }}.</small>-->
             </div>
             <h2><a class="article-title">{{ wish.title }}</a></h2>
             <p class="article-content">{{ wish.description }}</p>
@@ -35,7 +35,7 @@
             <p class="article-content">{{ profile.address }}</p>
             <br>
 
-            {% if profile.favoritecolors or profile.favoritematerials or profile.favoritesmells or profile.favoritefoods or profile.favoritestyles or profile.nerdlove %}
+            {% if profile.favoritecolors or profile.favoritematerials or profile.favoritesmells or profile.favoritefood or profile.favoritestyles or profile.nerdlove %}
             <h3>Ich mag</h3>
             {% endif %}
 
@@ -54,9 +54,9 @@
             <p class="article-content">{{ profile.favoritesmells }}</p>
             {% endif %}
 
-            {% if profile.favoritefoods %}
+            {% if profile.favoritefood %}
             <a class="article-title"><b>Meine Lieblingsessen/getränke</b></a>
-            <p class="article-content">{{ profile.favoritefoods }}</p>
+            <p class="article-content">{{ profile.favoritefood }}</p>
             {% endif %}
 
             {% if profile.favoritestyles %}
@@ -87,7 +87,7 @@
             <h3>Weitere Infos</h3>
             {% endif %}
 
-            {% if profile.charakters %}
+            {% if profile.characters %}
             <a class="article-title"><b>Meine Larpcharaktere</b></a>
             <p class="article-content">{{ profile.characters }}</p>
             {% endif %}
@@ -104,7 +104,7 @@
 
             {% if profile.pinterest %}
             <a class="article-title"><b>Hier kannst du meinen Geschmack stalken:</b></a>
-            <p class="article-content"><a href=" {{ profile.pinterest }} ">Mein Pinterest</a></p>
+            <p class="article-content"><a href="{{ profile.pinterest }} " target="_blank">Mein Pinterest</a></p>
             {% endif %}
 
             {% if profile.other %}
@@ -127,11 +127,19 @@ Dein Geschenk wurde am {{ wish.sent }} verschickt und am {{ wish.received }} von
 
 
 {% else %}
+
+{% ifequal shipping_phase 'Shipping on' %}
+
     <form action="" method=POST> {% csrf_token %}
         {{ form|crispy }}
         <input type="text" name="wishid" value="{{ wish.id }}" readonly style="visibility: hidden;">
         <input type="submit" value="Wunsch als verschickt markieren">
     </form>
+
+{% endifequal %}
+{% ifnotequal shipping_phase 'Shipping on' %}
+zwischen dem 30.11.-20.12. ist die Phase, wo du erfüllte Wünsche abschicken darfst. Dann wird hier ein Button erscheinen, mit dem du ein Wichtelgeschenk als "verschickt" markieren kannst.
+{% endifnotequal %}
 
 {% endif %}
 </div>

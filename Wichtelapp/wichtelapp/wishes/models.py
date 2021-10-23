@@ -41,3 +41,8 @@ class Wish(models.Model):
     received = models.DateTimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     secret_santa = models.ForeignKey(User, on_delete = models.CASCADE, null=True, blank=True, related_name='secret_santa')
     trackingnr = models.CharField(max_length=100, null=True, blank=True)
+
+class Phase(models.Model):
+     name = models.CharField(unique=True, max_length=200)
+     start_date = models.DateTimeField(auto_now=False, auto_now_add=False, null=False, blank=False)
+     end_date = models.DateTimeField(auto_now=False, auto_now_add=False, null=False, blank=False)

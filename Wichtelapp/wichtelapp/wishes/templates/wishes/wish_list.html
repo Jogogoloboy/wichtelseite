@@ -3,8 +3,10 @@
 {% block content %}
 <h1>Wunschliste</h1>
 
+{% ifequal selection_phase 'Selection on' %}
+
 {% if submitted %}
-yo...hoho
+yo...hoho. Du hast einen Wunsch angenommen. Details findest du unter "Wunsch erfüllen".
 {% else %}
 
 {% if is_allowed %}
@@ -14,8 +16,8 @@ yo...hoho
 <article class="media content-section">
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2">{{ wish.get_category_display }} {{ wish.wisher }}</a>
-        <small class="text-muted">{{ wish.get_difficulty_display }}  {{ wish.state }} </small>
+        <a class="mr-2">{{ wish.get_category_display }}</a>
+        <small class="text-muted">{{ wish.get_difficulty_display }} </small>
       </div>
       <h2><a class="article-title">{{ wish.title }}</a></h2>
       <p class="article-content">{{ wish.description }}</p>
@@ -32,6 +34,12 @@ yo...hoho
 Du hast schon einen Wunsch ausgewählt.
 {% endif %}
 {% endif %}
+
+{% endifequal %}
+
+{% ifnotequal selection_phase 'Selection on' %}
+Wünsche auswählen: 16.11.-16.12. Du bist entweder zu früh, oder zu spät.
+{% endifnotequal %}
 
 
 {% endblock %}

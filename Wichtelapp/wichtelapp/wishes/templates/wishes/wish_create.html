@@ -2,14 +2,15 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Add wish to database</h1>
+<h1>Schreibe deine Wünsche auf den Wunschzettel</h1>
 
+{% ifequal wishing_phase 'Wishing on' %}
 {% if notAllowed %}
 <p>Du hast 3 Wünsche eingetragen. Jetzt heißt es warten auf Santa Claws.</p>
 {% else %}
 
 {% if submitted %}
-Dein Wunsch wurde erfolgreich eingetragen.
+Dein Wunsch wurde erfolgreich in die Wunschliste eingetragen.
 
 <a href="{% url 'makeawish' %}">Noch einen Wunsch eintragen.</a>
 
@@ -21,8 +22,11 @@ Dein Wunsch wurde erfolgreich eingetragen.
 </form>
 
 {% endif %}
-
-
-
 {% endif %}
+{% endifequal %}
+
+{% ifnotequal wishing_phase 'Wishing on' %}
+Wünsche eintragen: 01.11.-15.11.  Du bist entweder zu früh, oder zu spät.
+{% endifnotequal %}
+
 {% endblock %}

@@ -21,7 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p#u38awu7b6h41m#f!+j+0dkflix+kge#@_wv9u*&33-y=vile'
+SECRET_KEY = 'p#u38awu7b6h41m#f!+j+0dkflix+kge#@_wv9u*&33-y=vilesfoijasfpoasfklajsfioj5a68kla3'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -70,6 +72,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wichtelapp.contextprocessor.time_now',
+                'wichtelapp.contextprocessor.wishing_phase',
+                'wichtelapp.contextprocessor.selection_phase',
+                'wichtelapp.contextprocessor.shipping_phase',
             ],
         },
     },
@@ -142,12 +148,15 @@ EMAIL_USE_TLS = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_USER = 'secret.santa.nordpol@gmail.com'
+# os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = 'dennxzzervlsmyrj'
+# os.environ.get('EMAIL_PASS')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 

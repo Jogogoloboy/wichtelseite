@@ -1,9 +1,17 @@
 {% extends 'pages/base.html' %}
 {% block content %}
 
-<h1>Hello World</h1>
+<h1>Welcome to Wichteling</h1>
 
-<p>this is a template</p>
+{% if user.is_authenticated %}
+<p>Schön, dass du dabei bist. <br>
+Du solltest jetzt auf der rechten Seite ein Panel sehen. Dort stehen die Zeiträume für die verschiedenen Phasen des Wichtelprojekts.
+Je nach dem, welche Phase gerade aktiv ist, kannst du bestimmte Akionen ausführen.</p>
+
+{% else %}
+<p>Wenn du mitmachen möchtest, lese dir die "About"-Seite gut durch und erstelle anschließend einen Account. </p>
+
+{% endif%}
 
 {% endblock %}
 

@@ -23,4 +23,4 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['address', 'favoritecolors', 'favoritematerials', 'favoritesmells', 'favoritefood', 'favoritestyles', 'idontlike', 'allergies', 'accessories', 'sizes', 'nerdlove', 'characters', 'pinterest', 'image1', 'image2', 'image3']
+        fields = ['address', 'favoritecolors', 'favoritematerials', 'favoritesmells', 'favoritefood', 'favoritestyles', 'idontlike', 'allergies', 'accessories', 'sizes', 'nerdlove', 'characters', 'other', 'pinterest', 'image1', 'image2', 'image3']
