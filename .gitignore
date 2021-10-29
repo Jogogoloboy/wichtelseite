@@ -6,7 +6,7 @@ Wichtelapp/wichtelapp/pages/migrations/*
 Wichtelapp/wichtelapp/users/migrations/*
 Wichtelapp/wichtelapp/wishes/migrations/*
 Wichtelapp/wichtelapp/db.sqlite3
-Wichtelapp/wichtelapp/media/*
+Wichtelapp/wichtelapp/media/profile_pics/*
 
 # C extensions
 *.so
