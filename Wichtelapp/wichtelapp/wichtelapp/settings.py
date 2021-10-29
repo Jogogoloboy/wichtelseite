@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+import json
+
+with open('/etc/wichtelapp_config.json') as config_file:
+    config = json.load(config_file)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,14 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'p#u38awu7b6h41m#f!+j+0dkflix+kge#@_wv9u*&33-y=vilesfoijasfpoasfklajsfioj5a68kla3'
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -90,7 +92,7 @@ WSGI_APPLICATION = 'wichtelapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -130,7 +132,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -148,9 +150,9 @@ EMAIL_USE_TLS = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-EMAIL_HOST_USER = 'secret.santa.nordpol@gmail.com'
+EMAIL_HOST_USER = config['EMAIL_USER']
 # os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = 'dennxzzervlsmyrj'
+EMAIL_HOST_PASSWORD = config['EMAIL_PASS']
 # os.environ.get('EMAIL_PASS')
 
 # Default primary key field type
